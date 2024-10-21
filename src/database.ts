@@ -18,13 +18,10 @@ export async function getEmailsFromTables(): Promise<{ playerEmails: string[], b
     const [playerEmails] = await connection.query('SELECT email FROM Player WHERE player_state = "Active"');
     const [blackListEmails] = await connection.query('SELECT email FROM blackListEmails');
 
-
     await connection.end();
-
    
     const playerEmailsArr = (playerEmails as Array<{ email: string }>).map(row => normalizeEmail(row.email));
     const blackListEmailsArr = (blackListEmails as Array<{ email: string }>).map(row => normalizeEmail(row.email));
-
     
     return {
         playerEmails: playerEmailsArr,

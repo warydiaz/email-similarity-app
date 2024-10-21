@@ -1,18 +1,15 @@
 import { checkEmailSimilarity } from './emailComparison';
 import { sendEmail } from './emailService';
 
-async function main(newEmail: string, recipientEmail: string) {
+async function main(newEmail: string) {
     const similarFound = await checkEmailSimilarity(newEmail);
 
     if (similarFound) {
-        await sendEmail(recipientEmail, 'Email Similar Detectado', `Se ha encontrado un email similar al ingresado: ${newEmail}`);
-    } else {
-        console.log('No se encontró ningún email similar');
+        await sendEmail('Similar Email Detected', `A similar email to the one entered has been found ${newEmail}`);
     }
 }
 
 // Ejemplo de uso
 const newEmail = 'diaz@vistagaming.com'; // Email a comparar
-const recipientEmail = 'adiaz@vistagaming.com'; // Email del destinatario
 
-main(newEmail, recipientEmail).catch(console.error);
+main(newEmail).catch(console.error);

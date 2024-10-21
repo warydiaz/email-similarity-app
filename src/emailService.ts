@@ -1,27 +1,26 @@
 import nodemailer from 'nodemailer';
 
-export async function sendEmail(to: string, subject: string, body: string) {
+export async function sendEmail( subject: string, body: string) {
     const transporter = nodemailer.createTransport({
-        host: "cbmalta.com", // Dirección del servidor de Exchange
-        port: 587, // Puerto SMTP de Exchange (587 para TLS, 465 para SSL)
-        secure: false, // Cambia a true si usas el puerto 465 y quieres conexión segura SSL
+        host: process.env.MAIL_HOST, 
+        port: 587, 
+        secure: false, 
         auth: {
-            user: process.env.MAIL_USER, // Tu dirección de correo de Exchange
-            pass: process.env.PASS_MAIL, // Tu contraseña de Exchange
+            user: process.env.MAIL_USER, 
+            pass: process.env.PASS_MAIL, 
         },
         tls: {
-            ciphers: 'SSLv3', // Especifica un cifrado si es necesario
-            rejectUnauthorized: false // Cambia a true si el certificado del servidor está firmado por una CA de confianza
+            ciphers: process.env.MAIL_ENCRYPTION, 
+            rejectUnauthorized: false 
         },
-        logger: true, // Activa el registro
-        debug: true, // Activa el modo de depuración
+        logger: false,
+        debug: false, 
     });
 
     await transporter.sendMail({
         from: process.env.MAIL_USER,
-        to: to,
+        to: process.env.MAIL_TO,
         subject: subject,
         text: body
     });
-    console.log('Email enviado con éxito');
 }

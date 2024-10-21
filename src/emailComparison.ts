@@ -7,16 +7,14 @@ export async function checkEmailSimilarity(newEmail: string, threshold: number =
 
     // Comparar con la tabla Player
     for (const email of playerEmails) {
-        if (isSimilar(normalizedNewEmail, email, threshold)) {
-            console.log(`Email similar encontrado en Player: ${email}`);
+        if (isSimilar(normalizedNewEmail, email, threshold)) {            
             return true;
         }
     }
 
     // Comparar con la tabla blackListEmails
     for (const email of blackListEmails) {
-        if (isSimilar(normalizedNewEmail, email, threshold)) {
-            console.log(`Email similar encontrado en blackListEmails: ${email}`);
+        if (isSimilar(normalizedNewEmail, email, threshold)) {           
             return true;
         }
     }

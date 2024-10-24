@@ -1,0 +1,12 @@
+stages:
+  - build
+  - test
+
+build:
+  stage: build
+  script: 
+    - echo "Contrunyendo el proyecto"
+
+test:
+  stage: test
+    - echo "Testeando el projecto"
